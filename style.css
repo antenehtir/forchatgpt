@@ -1,0 +1,100 @@
+:root {
+  --yellow: #c62828;
+  --charcoal: #2a2a2a;
+  --cream: #fff7f7;
+  --muted: #7a4a4a;
+  --border: #f0caca;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  color: var(--charcoal);
+  background: linear-gradient(130deg, #fff5f5, #ffecec 45%, #ffffff);
+}
+.app-shell { display: grid; grid-template-columns: minmax(380px, 460px) 1fr; min-height: 100vh; }
+.form-panel { padding: 1.2rem; background: #fff; border-right: 1px solid #ececec; overflow-y: auto; }
+h1 { margin: 0; font-size: 1.4rem; }
+.subtitle { margin-top: 0.3rem; color: var(--muted); font-size: 0.85rem; }
+.form-section { margin-top: 1rem; border: 1px solid #ededed; border-left: 4px solid #d32f2f; border-radius: 10px; padding: 0.8rem; }
+.form-section h2 { margin: 0 0 0.65rem; font-size: 0.95rem; }
+.field-grid { display: grid; gap: 0.6rem; grid-template-columns: 1fr 1fr; }
+label { display: grid; gap: 0.28rem; font-size: 0.76rem; font-weight: 600; color: #4a4a4a; }
+input, select, textarea { width: 100%; border: 1px solid #d9d9d9; border-radius: 8px; padding: 0.48rem 0.55rem; font: inherit; font-size: 0.78rem; }
+.full { grid-column: 1 / -1; }
+.check-grid { display: grid; gap: 0.45rem; grid-template-columns: 1fr 1fr; }
+.check-grid label, .radio-stack label { display: flex; align-items: center; gap: 0.35rem; font-weight: 500; }
+.dynamic-area { margin-top: 0.7rem; padding-top: 0.55rem; border-top: 1px dashed #e4bcbc; }
+.dynamic-area h4 { margin: 0 0 0.4rem; font-size: 0.76rem; }
+.crop-controls { display: grid; gap: 0.45rem; grid-template-columns: repeat(3, 1fr); margin-top: 0.4rem; }
+.vaccine-records { display: grid; gap: 0.7rem; }
+.vaccine-row { display: grid; grid-template-columns: 1.4fr 0.8fr 1fr 1fr auto; gap: 0.5rem; align-items: end; padding: 0.5rem; border: 1px solid #f0cdcd; border-radius: 10px; background: #fffdfd; }
+.vaccine-row button { padding: 0.45rem 0.55rem; box-shadow: none; font-size: 0.75rem; }
+.vaccine-add-btn { margin-top: 0.6rem; width: fit-content; }
+.upload-status { border: 1px dashed #dca5a5; background: #fff8f8; border-radius: 8px; min-height: 46px; display: grid; place-items: center; font-size: 0.74rem; color: #7a4a4a; overflow: hidden; }
+.upload-status img { width: 100%; max-height: 90px; object-fit: cover; }
+.actions { position: sticky; bottom: 0; background: #fff; display: flex; gap: 0.5rem; padding: 0.8rem 0 0; flex-wrap: wrap; }
+button { border: 0; background: linear-gradient(140deg, #d32f2f, #b71c1c); color: #fff; border-radius: 8px; padding: 0.58rem 0.72rem; font-weight: 700; cursor: pointer; box-shadow: 0 5px 12px rgba(211,47,47,0.25); }
+button.secondary { background: linear-gradient(140deg, #d32f2f, #b71c1c); color: #fff; }
+button:disabled { cursor: not-allowed; opacity: 0.6; }
+.preview-panel { padding: 1.2rem; overflow: auto; background: transparent; }
+.preview-header { margin-bottom: 0.8rem; }
+.preview-header h2 { margin: 0; font-size: 1.1rem; }
+.preview-header p { margin: 0.2rem 0 0; font-size: 0.8rem; color: var(--muted); }
+.spread { display: grid; grid-template-columns: repeat(2, minmax(560px, 560px)); justify-content: center; gap: 0; align-items: stretch; }
+.booklet { background: transparent; border-radius: 18px; box-shadow: none; border: 0; overflow: visible; }
+.passport-page { position: relative; background: linear-gradient(180deg, #fffdfd, var(--cream)); padding: 1rem; min-height: 900px; border: 1px solid var(--border); width: 560px; display: flex; flex-direction: column; box-shadow: 0 10px 24px rgba(0,0,0,0.12); }
+#pageOne { border-top-left-radius: 18px; border-bottom-left-radius: 18px; border-right: 0; }
+#pageTwo { border-top-right-radius: 18px; border-bottom-right-radius: 18px; border-left: 1px solid #e4bdbd; }
+.top-accent { height: 8px; background: var(--yellow); border-radius: 9px; margin-bottom: 0.7rem; }
+.watermark { position: absolute; inset: 0; pointer-events: none; opacity: 0.06; font-size: 1.2rem; display: grid; place-items: center; font-weight: 700; transform: rotate(-23deg); }
+.passport-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.8rem; }
+.passport-header h2 { margin: 0; font-size: 1.08rem; }
+.passport-number { margin: 0.2rem 0 0; font-size: 0.82rem; font-weight: 600; }
+.brand-block { display: flex; align-items: center; gap: 0.55rem; }
+.brand-logo { width: 62px; height: 62px; border-radius: 12px; object-fit: cover; border: 1px solid #efb3b3; background: #fff; }
+.badge { padding: 0.2rem 0.45rem; border-radius: 999px; color: #fff; font-size: 0.67rem; font-weight: 700; min-height: 1.35rem; }
+.badge.expired { background: #cf1f1f; }
+.badge.warning { background: #f08b18; }
+.badge.hidden { display: none; }
+.header-meta { display: grid; gap: 0.4rem; justify-items: end; }
+.qr-mini { padding: 0.28rem; }
+.qr-mini small { font-size: 0.58rem; }
+#qrCodePageOne img, #qrCodePageTwo img { margin: 0 auto; width: 62px; height: 62px; }
+.screening-date { margin: 0 0 0.35rem; font-size: 0.7rem; font-weight: 600; color: #5a5a5a; }
+.section { margin-top: 0.8rem; border-top: 1px solid #efc7c7; padding-top: 0.6rem; position: relative; z-index: 1; }
+.section h3 { margin: 0 0 0.45rem; font-size: 0.82rem; }
+.identity-card { display: grid; grid-template-columns: 1fr 118px; gap: 0.7rem; }
+.photo-box { width: 118px; height: 145px; border: 1px dashed #ccb96e; border-radius: 10px; background: #fff; overflow: hidden; }
+.photo-box img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.info-list, .summary-list { margin: 0; display: grid; grid-template-columns: 1fr; gap: 0.24rem; }
+dt { font-weight: 700; display: inline; font-size: 0.73rem; }
+dd { margin: 0; display: inline; font-size: 0.73rem; color: #4f4f4f; }
+.summary-list div, .info-list div { display: grid; grid-template-columns: 160px 1fr; gap: 0.2rem; }
+.pill-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.pill-list li { background: #ffe8e8; border: 1px solid #efb3b3; border-radius: 999px; padding: 0.18rem 0.52rem; font-size: 0.7rem; font-weight: 600; }
+.section-grid { display: grid; gap: 0.4rem; grid-template-columns: 1fr 1fr; align-content: start; }
+.section-grid-tight { margin-top: 0.2rem; }
+.section-nested { margin-top: 0; border-top: 0; padding-top: 0; }
+.section-nested h3 { font-size: 0.78rem; margin-bottom: 0.35rem; }
+.section-full { grid-column: 1 / -1; }
+.qr-card { border: 1px solid #e8b9b9; border-radius: 12px; background: #fff; padding: 0.45rem; text-align: center; box-shadow: 0 3px 10px rgba(198,40,40,0.08); }
+.clearance-statement { margin: 0; font-size: 0.76rem; line-height: 1.4; }
+.fitness-declaration-title { margin: 0.5rem 0 0.2rem; font-size: 0.72rem; font-weight: 700; }
+.physician-grid { display: grid; grid-template-columns: 1fr 170px; gap: 0.7rem; align-items: end; }
+.signature-box { height: 90px; border: 1px solid #efb3b3; border-radius: 8px; background: #fff; display: grid; place-items: center; font-family: 'Brush Script MT', cursive; font-size: 1.25rem; overflow: hidden; }
+.signature-box img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.dates-row { display: flex; justify-content: space-between; margin-top: 0.5rem; font-size: 0.73rem; font-weight: 600; }
+
+@media (max-width: 1600px) {
+  .spread { grid-template-columns: repeat(2, minmax(500px, 500px)); }
+  .passport-page { width: 500px; }
+}
+@media (max-width: 1280px) {
+  .app-shell { grid-template-columns: 1fr; }
+  .spread { grid-template-columns: 1fr; justify-content: stretch; gap: 0.8rem; }
+  .booklet { border-radius: 14px; overflow: visible; box-shadow: none; border: 0; }
+  .passport-page { width: 100%; min-height: auto; border-radius: 14px; border: 1px solid var(--border); }
+  #pageOne, #pageTwo { border-right: 1px solid var(--border); border-left: 1px solid var(--border); }
+  .vaccine-row, .crop-controls { grid-template-columns: 1fr; }
+}

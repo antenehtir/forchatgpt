@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Habari Medical Passport Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="form-panel">
+        <div>
+          <h1>Habari Medical Passport</h1>
+          <p class="subtitle">Corporate-premium medical passport generator (HabariDOC Red Edition)</p>
+        </div>
+
+        <form id="passportForm" novalidate>
+          <section class="form-section">
+            <h2>Identity</h2>
+            <div class="field-grid">
+              <label>Full Name <input type="text" name="fullName" required /></label>
+              <label>National ID / Passport No <input type="text" name="idNumber" required /></label>
+              <label>Date of Birth <input type="date" name="dob" required /></label>
+              <label>Gender
+                <select name="gender" required>
+                  <option value="">Select</option><option>Male</option><option>Female</option><option>Other</option>
+                </select>
+              </label>
+              <label>Nationality <input type="text" name="nationality" required /></label>
+              <label>Phone Number <input type="tel" name="phone" required /></label>
+              <label class="full">Address <textarea name="address" rows="2" required></textarea></label>
+              <label class="full">Photo Upload <input type="file" name="photo" accept="image/*" /></label>
+              <div class="full crop-controls">
+                <label>Photo Zoom <input type="range" name="photoZoom" min="1" max="3" step="0.05" value="1" /></label>
+                <label>Photo X <input type="range" name="photoX" min="-100" max="100" value="0" /></label>
+                <label>Photo Y <input type="range" name="photoY" min="-100" max="100" value="0" /></label>
+              </div>
+            </div>
+          </section>
+
+          <section class="form-section">
+            <h2>Purpose Declaration</h2>
+            <div class="check-grid">
+              <label><input type="checkbox" name="purpose" value="International Travel" />International Travel</label>
+              <label><input type="checkbox" name="purpose" value="Pre-Employment" />Pre-Employment</label>
+              <label><input type="checkbox" name="purpose" value="Pre-Enrollment" />Pre-Enrollment</label>
+              <label><input type="checkbox" name="purpose" value="Pre-Deployment" />Pre-Deployment</label>
+              <label><input type="checkbox" name="purpose" value="Immigration" />Immigration</label>
+              <label><input type="checkbox" name="purpose" value="Personal Health Record" />Personal Health Record</label>
+            </div>
+          </section>
+
+          <section class="form-section">
+            <h2>Health Screening Summary</h2>
+            <div class="field-grid">
+              <label>HIV <select name="hiv"><option>Negative</option><option>Positive</option><option>Not Done</option></select></label>
+              <label>Hepatitis B <select name="hepB"><option>Negative</option><option>Positive</option><option>Not Done</option></select></label>
+              <label>Hepatitis C <select name="hepC"><option>Negative</option><option>Positive</option><option>Not Done</option></select></label>
+              <label>TB Screening <select name="tbScreening" required><option>Negative</option><option>Positive</option><option>Not Done</option></select></label>
+              <label>Chest X-Ray <select name="chestXray"><option>Negative</option><option>Positive</option><option>Not Done</option></select></label>
+              <label>Screening Test Date <input type="date" name="screeningDate" /></label>
+              <label>TB Test Date <input type="date" name="tbDate" /></label>
+              <label>IGRA <select name="igra"><option>Negative</option><option>Positive</option><option>Not Done</option></select></label>
+              <label>Syphilis <select name="syphilis"><option>Negative</option><option>Positive</option><option>Not Done</option></select></label>
+              <label>Gonorrhea <select name="gonorrhea"><option>Negative</option><option>Positive</option><option>Not Done</option></select></label>
+              <label>Chlamydia <select name="chlamydia"><option>Negative</option><option>Positive</option><option>Not Done</option></select></label>
+              <label>Pap Smear <select name="papSmear"><option>Negative</option><option>Positive</option><option>Not Done</option></select></label>
+            </div>
+            <div class="dynamic-area">
+              <h4>Additional Communicable Tests</h4>
+              <div id="communicableExtra"></div>
+              <button type="button" id="addCommunicableBtn">+ Add Test</button>
+            </div>
+          </section>
+
+          <section class="form-section">
+            <h2>Vaccine Record</h2>
+            <div id="vaccineRecords" class="vaccine-records"></div>
+            <button type="button" id="addVaccineBtn" class="vaccine-add-btn">+ Add Vaccine</button>
+          </section>
+
+          <section class="form-section">
+            <h2>Medical History</h2>
+            <div class="field-grid">
+              <label class="full">Past Medical History <textarea name="history" rows="2"></textarea></label>
+              <label>Known Allergies
+                <select name="allergies"><option>None</option><option>Food Allergy</option><option>Drug Allergy</option><option>Environmental</option><option>Other</option></select>
+              </label>
+              <label>Blood Group
+                <select name="bloodGroup"><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select>
+              </label>
+              <label class="full">Current Medications <textarea name="medications" rows="2"></textarea></label>
+            </div>
+          </section>
+
+          <section class="form-section">
+            <h2>Non-Communicable</h2>
+            <div class="field-grid">
+              <label>RBS <select name="rbs"><option>Normal</option><option>Abnormal</option><option>Controlled</option><option>Not Done</option></select></label>
+              <label>HbA1c <select name="hba1c"><option>Normal</option><option>Abnormal</option><option>Controlled</option><option>Not Done</option></select></label>
+              <label>Lipid Profile <select name="lipid"><option>Normal</option><option>Abnormal</option><option>Controlled</option><option>Not Done</option></select></label>
+              <label>Renal Function <select name="renal"><option>Normal</option><option>Abnormal</option><option>Controlled</option><option>Not Done</option></select></label>
+              <label>Liver Function <select name="liver"><option>Normal</option><option>Abnormal</option><option>Controlled</option><option>Not Done</option></select></label>
+              <label>Tumor Markers <select name="tumor"><option>Not Done</option><option>Normal</option><option>Abnormal</option></select></label>
+            </div>
+            <div class="dynamic-area">
+              <h4>Additional Non-Communicable Tests</h4>
+              <div id="nonCommunicableExtra"></div>
+              <button type="button" id="addNonCommunicableBtn">+ Add Test</button>
+            </div>
+          </section>
+
+          <section class="form-section">
+            <h2>Physical Exam</h2>
+            <div class="field-grid">
+              <label>Weight (kg) <input type="number" step="0.1" name="weight" /></label>
+              <label>Height (cm) <input type="number" step="0.1" name="height" /></label>
+              <label>BMI (Auto) <input type="text" name="bmi" readonly /></label>
+              <label>Blood Pressure <input type="text" name="bp" placeholder="120/80" /></label>
+              <label>Heart Rate <input type="text" name="hr" /></label>
+              <label>Respiratory Rate <input type="text" name="rr" /></label>
+              <label>Temperature <input type="text" name="temp" /></label>
+              <label>Hearing Test <select name="hearing"><option>Not Done</option><option>Normal</option><option>Abnormal</option></select></label>
+              <label>Mental Health Evaluation <select name="mental"><option>Not Done</option><option>Normal</option><option>Abnormal</option></select></label>
+              <label>Visual Acuity Mode
+                <select name="visionMode"><option>Without Glasses</option><option>With Glasses</option></select>
+              </label>
+              <label>Visual Acuity Right
+                <select name="visionRight"><option>20/20</option><option>20/25</option><option>20/30</option><option>20/40</option><option>20/50</option><option>20/70</option><option>20/100</option><option>20/200</option></select>
+              </label>
+              <label>Visual Acuity Left
+                <select name="visionLeft"><option>20/20</option><option>20/25</option><option>20/30</option><option>20/40</option><option>20/50</option><option>20/70</option><option>20/100</option><option>20/200</option></select>
+              </label>
+            </div>
+          </section>
+
+          <section class="form-section">
+            <h2>Clearance Status</h2>
+            <div class="radio-stack">
+              <label><input type="radio" name="clearance" value="Medically Fit – Approved" checked />Medically Fit – Approved</label>
+              <label><input type="radio" name="clearance" value="Clearance with Restrictions" />Clearance with Restrictions</label>
+              <label><input type="radio" name="clearance" value="Follow-Up Required" />Follow-Up Required</label>
+              <label><input type="radio" name="clearance" value="Clearance Not Approved" />Clearance Not Approved</label>
+              <label><input type="radio" name="clearance" value="Unable to Conclude" />Unable to Conclude</label>
+            </div>
+            <label>Restriction Remarks <textarea name="restrictionRemarks" rows="2" placeholder="Required when restrictions selected"></textarea></label>
+          </section>
+
+          <section class="form-section">
+            <h2>Physician & Institution</h2>
+            <div class="field-grid">
+              <label>Physician Full Name <input type="text" name="physicianName" required /></label>
+              <label>Medical License Number <input type="text" name="license" required /></label>
+              <label>Practicing Institution <input type="text" name="institution" required /></label>
+              <label>Institution Phone Number <input type="text" name="institutionPhone" required /></label>
+              <label class="full">Institution Full Address <textarea name="institutionAddress" rows="2" required></textarea></label>
+              <label class="full">Signature Upload <input type="file" name="signature" accept="image/*" /></label>
+              <div class="full crop-controls">
+                <label>Signature Zoom <input type="range" name="signatureZoom" min="1" max="3" step="0.05" value="1" /></label>
+                <label>Signature X <input type="range" name="signatureX" min="-100" max="100" value="0" /></label>
+                <label>Signature Y <input type="range" name="signatureY" min="-100" max="100" value="0" /></label>
+              </div>
+              <div class="full upload-status" id="signatureUploadStatus">No signature image selected.</div>
+              <label class="full">or Digital Signature Text <input type="text" name="signatureText" placeholder="Dr. Jane Doe" /></label>
+              <label>Date Issued <input type="date" name="issueDate" required /></label>
+              <label>Valid Until <input type="date" name="validUntil" required /></label>
+            </div>
+          </section>
+
+          <div class="actions">
+            <button type="button" id="previewBtn">Preview Passport</button>
+            <button type="button" id="generateBtn">Generate Passport</button>
+            <button type="button" id="resetBtn" class="secondary">Reset Form</button>
+          </div>
+        </form>
+      </aside>
+
+      <main class="preview-panel">
+        <div class="preview-header">
+          <h2>Preview</h2>
+          <p>Review the passport booklet before exporting to PDF.</p>
+        </div>
+        <div class="spread booklet" id="passportSpread">
+          <article class="passport-page" id="pageOne">
+            <div class="top-accent"></div>
+            <p class="watermark">Habari Medical Passport – Digital Record</p>
+            <header class="passport-header">
+              <div class="brand-block">
+                <img class="brand-logo" src="https://play-lh.googleusercontent.com/2Yg_EcEcjUcXghSoEMH16h5Qfg54kcdmIdzmOp-cIKyPP9WIseHzNud2r681OvX3rQ" alt="HabariDOC Logo" crossorigin="anonymous" referrerpolicy="no-referrer" />
+                <div>
+                  <h2>Habari Medical Passport</h2>
+                  <p class="passport-number" id="previewPassportNumber"></p>
+                </div>
+              </div>
+              <div class="header-meta">
+                <div class="qr-card qr-mini"><div id="qrCodePageOne"></div><small>Scan to Verify</small></div>
+                <span id="expiryBadge" class="badge"></span>
+              </div>
+            </header>
+
+            <section class="section identity-card">
+              <div><h3>Identity</h3><dl class="info-list" id="identityList"></dl></div>
+              <div class="photo-box"><img id="photoPreview" alt="Profile" /></div>
+            </section>
+
+            <section class="section"><h3>Purpose Declaration</h3><ul id="purposePreview" class="pill-list"></ul></section>
+            <section class="section section-full"><h3>Health Screening Summary</h3><section class="section section-nested"><h3>Medical History</h3><dl class="summary-list" id="historyPreview"></dl></section><section class="section section-nested"><h3>Physical Examination</h3><dl id="physicalPreview" class="summary-list"></dl></section></section>
+          </article>
+
+          <article class="passport-page" id="pageTwo">
+            <div class="top-accent"></div>
+            <p class="watermark">Habari Medical Passport – Digital Record</p>
+            <header class="passport-header">
+              <h2>Screening & Clearance</h2>
+              <div class="qr-card qr-mini"><div id="qrCodePageTwo"></div><small>Scan to Verify</small></div>
+            </header>
+
+            <section class="section section-full">
+              <h3>Disease Screening</h3>
+              <p class="screening-date" id="screeningDatePreview"></p>
+              <div class="section-grid section-grid-tight">
+                <section class="section section-nested"><h3>Communicable Disease</h3><dl id="communicablePreview" class="summary-list"></dl><dl id="communicableExtraPreview" class="summary-list"></dl></section>
+                <section class="section section-nested"><h3>Non-Communicable</h3><dl id="nonCommunicablePreview" class="summary-list"></dl><dl id="nonCommunicableExtraPreview" class="summary-list"></dl></section>
+              </div>
+            </section>
+
+            <section class="section section-full"><h3>Vaccination</h3><dl id="vaccinePreview" class="summary-list"></dl></section>
+            <section class="section section-full"><h3>Clearance Status</h3><p id="clearancePreview" class="clearance-statement"></p><p class="fitness-declaration-title">Medical Fitness Declaration</p><p id="fitnessDeclarationPreview" class="clearance-statement"></p></section>
+
+            <section class="section physician-section">
+              <h3>Physician & Institution</h3>
+              <div class="physician-grid"><dl id="physicianPreview" class="summary-list"></dl><div class="signature-box" id="signaturePreview">Signature</div></div>
+              <div class="dates-row"><span id="issueDatePreview"></span><span id="expiryDatePreview"></span></div>
+            </section>
+          </article>
+        </div>
+      </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
