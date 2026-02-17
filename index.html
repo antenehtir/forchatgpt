@@ -32,11 +32,16 @@
               <label>Nationality <input type="text" name="nationality" required /></label>
               <label>Phone Number <input type="tel" name="phone" required /></label>
               <label class="full">Address <textarea name="address" rows="2" required></textarea></label>
+
               <label class="full">Photo Upload <input type="file" name="photo" accept="image/*" /></label>
-              <div class="full crop-controls">
-                <label>Photo Zoom <input type="range" name="photoZoom" min="1" max="3" step="0.05" value="1" /></label>
-                <label>Photo X <input type="range" name="photoX" min="-100" max="100" value="0" /></label>
-                <label>Photo Y <input type="range" name="photoY" min="-100" max="100" value="0" /></label>
+              <div id="photoCropBox" class="full crop-box hidden">
+                <div class="crop-help">Photo crop (opens right after upload): drag image to align, zoom if needed.</div>
+                <canvas id="photoCropCanvas" width="360" height="460"></canvas>
+                <label>Photo Zoom <input type="range" id="photoZoomCanvas" min="0.4" max="3" step="0.01" value="1" /></label>
+                <div class="crop-btn-row">
+                  <button type="button" id="applyPhotoCrop">Apply Photo Crop</button>
+                  <button type="button" id="resetPhotoCrop" class="secondary">Reset</button>
+                </div>
               </div>
             </div>
           </section>
@@ -57,22 +62,34 @@
             <h2>Health Screening Summary</h2>
             <div class="field-grid">
               <label>HIV <select name="hiv"><option>Negative</option><option>Positive</option><option>Not Done</option></select></label>
+              <label>HIV Test Date <input type="date" name="hivDate" /></label>
               <label>Hepatitis B <select name="hepB"><option>Negative</option><option>Positive</option><option>Not Done</option></select></label>
+              <label>Hepatitis B Test Date <input type="date" name="hepBDate" /></label>
               <label>Hepatitis C <select name="hepC"><option>Negative</option><option>Positive</option><option>Not Done</option></select></label>
-              <label>TB Screening <select name="tbScreening" required><option>Negative</option><option>Positive</option><option>Not Done</option></select></label>
+              <label>Hepatitis C Test Date <input type="date" name="hepCDate" /></label>
               <label>Chest X-Ray <select name="chestXray"><option>Negative</option><option>Positive</option><option>Not Done</option></select></label>
+              <label>Chest X-Ray Date <input type="date" name="chestXrayDate" /></label>
               <label>Screening Test Date <input type="date" name="screeningDate" /></label>
-              <label>TB Test Date <input type="date" name="tbDate" /></label>
               <label>IGRA <select name="igra"><option>Negative</option><option>Positive</option><option>Not Done</option></select></label>
+              <label>IGRA Date <input type="date" name="igraDate" /></label>
               <label>Syphilis <select name="syphilis"><option>Negative</option><option>Positive</option><option>Not Done</option></select></label>
+              <label>Syphilis Test Date <input type="date" name="syphilisDate" /></label>
               <label>Gonorrhea <select name="gonorrhea"><option>Negative</option><option>Positive</option><option>Not Done</option></select></label>
+              <label>Gonorrhea Test Date <input type="date" name="gonorrheaDate" /></label>
               <label>Chlamydia <select name="chlamydia"><option>Negative</option><option>Positive</option><option>Not Done</option></select></label>
+              <label>Chlamydia Test Date <input type="date" name="chlamydiaDate" /></label>
               <label>Pap Smear <select name="papSmear"><option>Negative</option><option>Positive</option><option>Not Done</option></select></label>
+              <label>Pap Smear Date <input type="date" name="papSmearDate" /></label>
             </div>
             <div class="dynamic-area">
               <h4>Additional Communicable Tests</h4>
               <div id="communicableExtra"></div>
               <button type="button" id="addCommunicableBtn">+ Add Test</button>
+            </div>
+            <div class="dynamic-area">
+              <h4>Remove / Exclude Tests from Generated Passport</h4>
+              <p class="subtitle small">Uncheck tests you want removed from the passport preview/PDF.</p>
+              <div id="testVisibilityControls" class="check-grid"></div>
             </div>
           </section>
 
@@ -100,11 +117,17 @@
             <h2>Non-Communicable</h2>
             <div class="field-grid">
               <label>RBS <select name="rbs"><option>Normal</option><option>Abnormal</option><option>Controlled</option><option>Not Done</option></select></label>
+              <label>RBS Date <input type="date" name="rbsDate" /></label>
               <label>HbA1c <select name="hba1c"><option>Normal</option><option>Abnormal</option><option>Controlled</option><option>Not Done</option></select></label>
+              <label>HbA1c Date <input type="date" name="hba1cDate" /></label>
               <label>Lipid Profile <select name="lipid"><option>Normal</option><option>Abnormal</option><option>Controlled</option><option>Not Done</option></select></label>
+              <label>Lipid Profile Date <input type="date" name="lipidDate" /></label>
               <label>Renal Function <select name="renal"><option>Normal</option><option>Abnormal</option><option>Controlled</option><option>Not Done</option></select></label>
+              <label>Renal Function Date <input type="date" name="renalDate" /></label>
               <label>Liver Function <select name="liver"><option>Normal</option><option>Abnormal</option><option>Controlled</option><option>Not Done</option></select></label>
+              <label>Liver Function Date <input type="date" name="liverDate" /></label>
               <label>Tumor Markers <select name="tumor"><option>Not Done</option><option>Normal</option><option>Abnormal</option></select></label>
+              <label>Tumor Markers Date <input type="date" name="tumorDate" /></label>
             </div>
             <div class="dynamic-area">
               <h4>Additional Non-Communicable Tests</h4>
@@ -134,6 +157,8 @@
               <label>Visual Acuity Left
                 <select name="visionLeft"><option>20/20</option><option>20/25</option><option>20/30</option><option>20/40</option><option>20/50</option><option>20/70</option><option>20/100</option><option>20/200</option></select>
               </label>
+              <label class="full">Physical Examination Findings <textarea name="physicalFindings" rows="2" placeholder="Enter findings..."></textarea></label>
+              <label class="full">Remarks <textarea name="remarks" rows="2" placeholder="Enter remark..."></textarea></label>
             </div>
           </section>
 
@@ -158,13 +183,22 @@
               <label>Institution Phone Number <input type="text" name="institutionPhone" required /></label>
               <label class="full">Institution Full Address <textarea name="institutionAddress" rows="2" required></textarea></label>
               <label class="full">Signature Upload <input type="file" name="signature" accept="image/*" /></label>
-              <div class="full crop-controls">
-                <label>Signature Zoom <input type="range" name="signatureZoom" min="1" max="3" step="0.05" value="1" /></label>
-                <label>Signature X <input type="range" name="signatureX" min="-100" max="100" value="0" /></label>
-                <label>Signature Y <input type="range" name="signatureY" min="-100" max="100" value="0" /></label>
+
+              <div id="signatureCropBox" class="full crop-box hidden">
+                <div class="crop-help">Signature crop (opens right after upload): drag image to align, zoom if needed.</div>
+                <canvas id="signatureCropCanvas" width="460" height="170"></canvas>
+                <label>Signature Zoom <input type="range" id="signatureZoomCanvas" min="0.3" max="4" step="0.01" value="1" /></label>
+                <label>Signature Background Remover
+                  <input type="range" id="signatureContrast" min="80" max="245" step="1" value="190" />
+                </label>
+                <div class="crop-btn-row">
+                  <button type="button" id="applySignatureCrop">Apply Signature Crop</button>
+                  <button type="button" id="applySignatureContrast" class="secondary">Apply Contrast Fix</button>
+                  <button type="button" id="resetSignatureCrop" class="secondary">Reset</button>
+                </div>
               </div>
+
               <div class="full upload-status" id="signatureUploadStatus">No signature image selected.</div>
-              <label class="full">or Digital Signature Text <input type="text" name="signatureText" placeholder="Dr. Jane Doe" /></label>
               <label>Date Issued <input type="date" name="issueDate" required /></label>
               <label>Valid Until <input type="date" name="validUntil" required /></label>
             </div>
@@ -173,6 +207,7 @@
           <div class="actions">
             <button type="button" id="previewBtn">Preview Passport</button>
             <button type="button" id="generateBtn">Generate Passport</button>
+            <button type="button" id="editBtn" class="secondary">Edit</button>
             <button type="button" id="resetBtn" class="secondary">Reset Form</button>
           </div>
         </form>
@@ -207,7 +242,9 @@
             </section>
 
             <section class="section"><h3>Purpose Declaration</h3><ul id="purposePreview" class="pill-list"></ul></section>
-            <section class="section section-full"><h3>Health Screening Summary</h3><section class="section section-nested"><h3>Medical History</h3><dl class="summary-list" id="historyPreview"></dl></section><section class="section section-nested"><h3>Physical Examination</h3><dl id="physicalPreview" class="summary-list"></dl></section></section>
+            <section class="section section-full"><h3>Health Summary</h3><section class="section section-nested"><h3>Medical History</h3><dl class="summary-list" id="historyPreview"></dl></section></section>
+            <section class="section section-full"><h3>Communicable Disease (Type of Test Done)</h3><dl id="communicablePreview" class="summary-list"></dl><dl id="communicableExtraPreview" class="summary-list"></dl></section>
+            <section class="section section-full"><h3>Vaccination</h3><dl id="vaccinePreview" class="summary-list"></dl></section>
           </article>
 
           <article class="passport-page" id="pageTwo">
@@ -221,13 +258,14 @@
             <section class="section section-full">
               <h3>Disease Screening</h3>
               <p class="screening-date" id="screeningDatePreview"></p>
-              <div class="section-grid section-grid-tight">
-                <section class="section section-nested"><h3>Communicable Disease</h3><dl id="communicablePreview" class="summary-list"></dl><dl id="communicableExtraPreview" class="summary-list"></dl></section>
-                <section class="section section-nested"><h3>Non-Communicable</h3><dl id="nonCommunicablePreview" class="summary-list"></dl><dl id="nonCommunicableExtraPreview" class="summary-list"></dl></section>
+              <div class="section-grid section-grid-tight tests-grid">
+                <section class="section section-nested tests-list"><h3>Non-Communicable (Type of Test Done)</h3><dl id="nonCommunicablePreview" class="summary-list"></dl><dl id="nonCommunicableExtraPreview" class="summary-list"></dl></section>
               </div>
             </section>
 
-            <section class="section section-full"><h3>Vaccination</h3><dl id="vaccinePreview" class="summary-list"></dl></section>
+            <section class="section section-full"><h3>Physical Examination</h3><dl id="physicalPreview" class="summary-list"></dl>
+            </section>
+
             <section class="section section-full"><h3>Clearance Status</h3><p id="clearancePreview" class="clearance-statement"></p><p class="fitness-declaration-title">Medical Fitness Declaration</p><p id="fitnessDeclarationPreview" class="clearance-statement"></p></section>
 
             <section class="section physician-section">
