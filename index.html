@@ -60,36 +60,15 @@
 
           <section class="form-section">
             <h2>Health Screening Summary</h2>
-            <div class="field-grid">
-              <label>HIV <select name="hiv"><option>Negative</option><option>Positive</option><option>Not Done</option></select></label>
-              <label>HIV Test Date <input type="date" name="hivDate" /></label>
-              <label>Hepatitis B <select name="hepB"><option>Negative</option><option>Positive</option><option>Not Done</option></select></label>
-              <label>Hepatitis B Test Date <input type="date" name="hepBDate" /></label>
-              <label>Hepatitis C <select name="hepC"><option>Negative</option><option>Positive</option><option>Not Done</option></select></label>
-              <label>Hepatitis C Test Date <input type="date" name="hepCDate" /></label>
-              <label>Chest X-Ray <select name="chestXray"><option>Negative</option><option>Positive</option><option>Not Done</option></select></label>
-              <label>Chest X-Ray Date <input type="date" name="chestXrayDate" /></label>
-              <label>Screening Test Date <input type="date" name="screeningDate" /></label>
-              <label>IGRA <select name="igra"><option>Negative</option><option>Positive</option><option>Not Done</option></select></label>
-              <label>IGRA Date <input type="date" name="igraDate" /></label>
-              <label>Syphilis <select name="syphilis"><option>Negative</option><option>Positive</option><option>Not Done</option></select></label>
-              <label>Syphilis Test Date <input type="date" name="syphilisDate" /></label>
-              <label>Gonorrhea <select name="gonorrhea"><option>Negative</option><option>Positive</option><option>Not Done</option></select></label>
-              <label>Gonorrhea Test Date <input type="date" name="gonorrheaDate" /></label>
-              <label>Chlamydia <select name="chlamydia"><option>Negative</option><option>Positive</option><option>Not Done</option></select></label>
-              <label>Chlamydia Test Date <input type="date" name="chlamydiaDate" /></label>
-              <label>Pap Smear <select name="papSmear"><option>Negative</option><option>Positive</option><option>Not Done</option></select></label>
-              <label>Pap Smear Date <input type="date" name="papSmearDate" /></label>
+            <div class="dynamic-area">
+              <h4>Communicable Investigations</h4>
+              <div id="communicableRecords" class="vaccine-records"></div>
+              <button type="button" id="addCommunicableBtn">+ Add Investigation</button>
             </div>
             <div class="dynamic-area">
-              <h4>Additional Communicable Tests</h4>
-              <div id="communicableExtra"></div>
-              <button type="button" id="addCommunicableBtn">+ Add Test</button>
-            </div>
-            <div class="dynamic-area">
-              <h4>Remove / Exclude Tests from Generated Passport</h4>
-              <p class="subtitle small">Uncheck tests you want removed from the passport preview/PDF.</p>
-              <div id="testVisibilityControls" class="check-grid"></div>
+              <h4>Non-Communicable Investigations</h4>
+              <div id="nonCommunicableRecords" class="vaccine-records"></div>
+              <button type="button" id="addNonCommunicableBtn">+ Add Investigation</button>
             </div>
           </section>
 
@@ -113,28 +92,7 @@
             </div>
           </section>
 
-          <section class="form-section">
-            <h2>Non-Communicable</h2>
-            <div class="field-grid">
-              <label>RBS <select name="rbs"><option>Normal</option><option>Abnormal</option><option>Controlled</option><option>Not Done</option></select></label>
-              <label>RBS Date <input type="date" name="rbsDate" /></label>
-              <label>HbA1c <select name="hba1c"><option>Normal</option><option>Abnormal</option><option>Controlled</option><option>Not Done</option></select></label>
-              <label>HbA1c Date <input type="date" name="hba1cDate" /></label>
-              <label>Lipid Profile <select name="lipid"><option>Normal</option><option>Abnormal</option><option>Controlled</option><option>Not Done</option></select></label>
-              <label>Lipid Profile Date <input type="date" name="lipidDate" /></label>
-              <label>Renal Function <select name="renal"><option>Normal</option><option>Abnormal</option><option>Controlled</option><option>Not Done</option></select></label>
-              <label>Renal Function Date <input type="date" name="renalDate" /></label>
-              <label>Liver Function <select name="liver"><option>Normal</option><option>Abnormal</option><option>Controlled</option><option>Not Done</option></select></label>
-              <label>Liver Function Date <input type="date" name="liverDate" /></label>
-              <label>Tumor Markers <select name="tumor"><option>Not Done</option><option>Normal</option><option>Abnormal</option></select></label>
-              <label>Tumor Markers Date <input type="date" name="tumorDate" /></label>
-            </div>
-            <div class="dynamic-area">
-              <h4>Additional Non-Communicable Tests</h4>
-              <div id="nonCommunicableExtra"></div>
-              <button type="button" id="addNonCommunicableBtn">+ Add Test</button>
-            </div>
-          </section>
+          
 
           <section class="form-section">
             <h2>Physical Exam</h2>
